@@ -1,12 +1,10 @@
-﻿using System.Transactions;
-
-class Conta
+﻿class Conta
 {
     // letra inicial maiúscula em propriedade pública
     public int Numero { get; private set; } 
     public string Titular { get; private set; }
     public double Saldo { get; private set; }
-    public double? Limite { get; set; }
+    public double Limite { get; set; }
 
     public Conta(int numero, string titular, double saldo, double limite)
     {
@@ -25,7 +23,6 @@ class Conta
                         "Titular da conta: " + Titular + "\n" +
                         "Saldo disponível: R$" + saldoFormatado + "\n" +
                         "Limite da conta: R$" + limiteFormatado + "\n";
-
         Console.WriteLine(output);
     }
 
@@ -48,8 +45,8 @@ class Conta
 
     private bool Pode_sacar(double valor_saque)
     {
-        double vd = (double)(Saldo + Limite);
-        return valor_saque <= vd;
+        double valor_disponivel = Saldo + Limite;
+        return valor_saque <= valor_disponivel;
     }
 
     public void Saca(double valor)
